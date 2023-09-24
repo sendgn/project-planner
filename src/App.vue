@@ -13,5 +13,6 @@ body {
   max-width: 600px;
   margin: 0 auto;
   color: #555;
+  letter-spacing: 0.2px;
 }
 </style>
