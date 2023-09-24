@@ -5,23 +5,31 @@
         <SingleProject :project="project" />
       </div>
     </div>
+    <div v-if="error" class="error">{{ error }}</div>
   </div>
-  <div v-if="error">{{ error }}</div>
 </template>
 
 <script>
-import getProjects from '@/composables/getProjects';
-import SingleProject from '@/components/SingleProject.vue'
+import { computed, ref } from 'vue';
+import { useStore } from 'vuex';
+import SingleProject from '@/components/SingleProject.vue';
 
 export default {
   name: 'HomeView',
   components: { SingleProject },
   setup() {
-    const { projects, error, load } = getProjects();
+    const store = useStore();
+    const error = ref(null);
+    
+    store.dispatch('getProjects')
+      .catch((err) => {
+        error.value = err.message;
+      });
 
-    load();
-
-    return { projects, error };
+    return {
+      projects: computed(() => store.state.projects),
+      error
+    }
   }
 }
 </script>

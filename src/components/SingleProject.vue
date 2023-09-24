@@ -1,33 +1,51 @@
 <template>
   <div class="project">
     <div class="actions">
-      <h3 @click="handleToggleDetails">{{ project.title }}</h3>
+      <h3 @click="toggleDetails">{{ project.title }}</h3>
       <div class="icons">
         <span class="material-icons">edit</span>
-        <span class="material-icons">delete</span>
+        <span @click="deleteProject" class="material-icons">delete</span>
         <span class="material-icons">done</span>
-
       </div>
     </div>
-    <div v-if="isDetailsShowing" class="details">
+    <div v-if="showDetails" class="details">
       <p>{{ project.details }}</p>
     </div>
+    <div v-if="error">{{ error }}</div>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
   props: ['project'],
-  setup() {
-    const isDetailsShowing = ref(false);
+  setup(props) {
+    const store = useStore();
+    const showDetails = ref(false);
+    const error = ref(null);
 
-    const handleToggleDetails = () => {
-      isDetailsShowing.value = !isDetailsShowing.value;
+    const toggleDetails = () => {
+      showDetails.value = !showDetails.value;
     }
 
-    return { isDetailsShowing, handleToggleDetails };
+    const deleteProject = async () => {
+      try {
+        await store.dispatch('deleteProject', {
+          id: props.project.id
+        });
+      } catch (err) {
+        error.value = err.message;
+      }
+    }
+
+    return {
+      showDetails,
+      toggleDetails,
+      deleteProject,
+      error
+    };
   }
 }
 </script>
