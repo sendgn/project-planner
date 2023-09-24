@@ -3,13 +3,13 @@
     {
       "id": 1,
       "title": "Create new homepage banner",
-      "details": "Lorem ipsum",
+      "details": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia harum veritatis veniam aliquam hic! Reiciendis illo reprehenderit fugiat facere officiis optio eaque non, minus a! Laborum dicta modi molestiae corporis",
       "complete": false
     },
     {
       "id": 2,
       "title": "Make marketing email",
-      "details": "Lorem ipsum",
+      "details": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam sint iure ad dicta velit fugiat veritatis molestiae voluptate dolore pariatur",
       "complete": true
     }
   ]
