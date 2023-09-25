@@ -11,7 +11,6 @@
     <div v-if="showDetails" class="details">
       <p>{{ project.details }}</p>
     </div>
-    <div v-if="error">{{ error }}</div>
   </div>
 </template>
 
@@ -20,11 +19,11 @@ import { ref } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
+  name: 'SingleProject',
   props: ['project'],
   setup(props) {
     const store = useStore();
     const showDetails = ref(false);
-    const error = ref(null);
 
     const toggleDetails = () => {
       showDetails.value = !showDetails.value;
@@ -32,20 +31,15 @@ export default {
 
     const deleteProject = async () => {
       try {
-        await store.dispatch('deleteProject', {
+        await store.dispatch('delete', {
           id: props.project.id
         });
       } catch (err) {
-        error.value = err.message;
+        console.log(err.message);
       }
     }
 
-    return {
-      showDetails,
-      toggleDetails,
-      deleteProject,
-      error
-    };
+    return { showDetails, toggleDetails, deleteProject };
   }
 }
 </script>

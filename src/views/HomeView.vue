@@ -5,12 +5,11 @@
         <SingleProject :project="project" />
       </div>
     </div>
-    <div v-if="error" class="error">{{ error }}</div>
   </div>
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import { computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import SingleProject from '@/components/SingleProject.vue';
 
@@ -19,17 +18,16 @@ export default {
   components: { SingleProject },
   setup() {
     const store = useStore();
-    const error = ref(null);
     
-    store.dispatch('getProjects')
-      .catch((err) => {
-        error.value = err.message;
-      });
+    watchEffect(async () => {
+      try {
+        await store.dispatch('get');
+      } catch (err) {
+        console.log(err.message);
+      }
+    })
 
-    return {
-      projects: computed(() => store.state.projects),
-      error
-    }
+    return { projects: computed(() => store.state.projects) };
   }
 }
 </script>

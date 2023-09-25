@@ -13,7 +13,7 @@ const store = createStore({
     }
   },
   actions: {
-    async getProjects(context) {
+    async get(context) {
       const resp = await fetch(uri);
       if (resp.ok) {
         const data = await resp.json();
@@ -22,7 +22,7 @@ const store = createStore({
         throw new Error('Could not get projects');
       }
     },
-    async deleteProject(context, { id }) {
+    async delete(context, { id }) {
       const resp = await fetch(uri + id, {
         method: 'DELETE'
       });
