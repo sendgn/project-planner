@@ -5,7 +5,7 @@
       <div class="icons">
         <span class="material-icons">edit</span>
         <span @click="deleteProject" class="material-icons">delete</span>
-        <span class="material-icons">done</span>
+        <span @click="toggleComplete" class="material-icons">done</span>
       </div>
     </div>
     <div v-if="showDetails" class="details">
@@ -29,6 +29,16 @@ export default {
       showDetails.value = !showDetails.value;
     }
 
+    const toggleComplete = async () => {
+      try {
+        await store.dispatch('patch', {
+          id: props.project.id
+        });
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+
     const deleteProject = async () => {
       try {
         await store.dispatch('delete', {
@@ -39,7 +49,12 @@ export default {
       }
     }
 
-    return { showDetails, toggleDetails, deleteProject };
+    return {
+      showDetails,
+      toggleDetails,
+      toggleComplete,
+      deleteProject
+    };
   }
 }
 </script>

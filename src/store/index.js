@@ -32,6 +32,20 @@ const store = createStore({
       } else {
         throw new Error('Could not delete project');
       }
+    },
+    async patch(context, { id }) {
+      const project = store.state.projects.find((p) => p.id === id);
+      const resp = await fetch(uri + id, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ complete: !project.complete })
+      });
+      const updatedProject = await resp.json();
+      // if (resp.ok) {
+      //   context.commit('setProjects', data);
+      // } else {
+      //   throw new Error('Could not update project');
+      // }
     }
   }
 });
