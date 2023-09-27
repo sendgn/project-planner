@@ -10,6 +10,10 @@ const store = createStore({
     setProjects(state, payload) {
       state.projects = payload;
       console.log('projects state changed:', state.projects);
+    },
+    updateProjects(state, { project, mutate }) {
+      state.projects.find((p) => p.id === project.id);
+      mutate(project);
     }
   },
   actions: {
@@ -22,30 +26,31 @@ const store = createStore({
         throw new Error('Could not get projects');
       }
     },
-    async delete(context, { id }) {
-      const resp = await fetch(uri + id, {
+    async delete(context, project) {
+      const resp = await fetch(uri + project.id, {
         method: 'DELETE'
       });
       if (resp.ok) {
-        const data = store.state.projects.filter((p) => p.id !== id);
-        context.commit('setProjects', data);
+        const projects = store.state.projects.filter(
+          (p) => p.id !== project.id
+        );
+        context.commit('setProjects', projects);
       } else {
         throw new Error('Could not delete project');
       }
     },
-    async patch(context, { id }) {
-      const project = store.state.projects.find((p) => p.id === id);
-      const resp = await fetch(uri + id, {
+    async complete(context, project) {
+      const resp = await fetch(uri + project.id, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ complete: !project.complete })
       });
-      const updatedProject = await resp.json();
-      // if (resp.ok) {
-      //   context.commit('setProjects', data);
-      // } else {
-      //   throw new Error('Could not update project');
-      // }
+      if (resp.ok) {
+        const mutate = (p) => p.complete = !p.complete;
+        context.commit('updateProjects', { project, mutate });
+      } else {
+        throw new Error('Could not update project');
+      }
     }
   }
 });

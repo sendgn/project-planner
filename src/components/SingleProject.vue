@@ -31,9 +31,7 @@ export default {
 
     const toggleComplete = async () => {
       try {
-        await store.dispatch('patch', {
-          id: props.project.id
-        });
+        await store.dispatch('complete', props.project);
       } catch (err) {
         console.log(err.message);
       }
@@ -41,9 +39,7 @@ export default {
 
     const deleteProject = async () => {
       try {
-        await store.dispatch('delete', {
-          id: props.project.id
-        });
+        await store.dispatch('delete', props.project);
       } catch (err) {
         console.log(err.message);
       }
