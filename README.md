@@ -1,4 +1,5 @@
-# project-planner
+# Project Planner
+Simple project planner with using vue3 and vuex
 
 ## Project setup
 ```
