@@ -10,13 +10,27 @@
 
 <script>
 import { ref } from 'vue';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
 export default {
   setup() {
     const title = ref('');
     const details = ref('');
+    const store = useStore();
+    const router = useRouter();
 
-    const handleSubmit = () => {
-      console.log(title.value, details.value);
+    const handleSubmit = async () => {
+      try {
+        await store.dispatch('add', {
+          title: title.value,
+          details: details.value,
+          complete: false
+        });
+        router.push('/');
+      } catch (err) {
+        console.log(err.message);
+      }
     }
 
     return {

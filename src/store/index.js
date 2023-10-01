@@ -14,6 +14,9 @@ const store = createStore({
     updateProjects(state, { project, mutate }) {
       state.projects.find((p) => p.id === project.id);
       mutate(project);
+    },
+    addProject(state, payload) {
+      state.projects.push(payload);
     }
   },
   actions: {
@@ -51,7 +54,19 @@ const store = createStore({
       } else {
         throw new Error('Could not update project');
       }
-    }
+    },
+    async add(context, { title, details, complete }) {
+      const resp = await fetch(uri, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, details, complete })
+      });
+      if (resp.ok) {
+        context.commit('addProject', { title, details, complete });
+      } else {
+        throw new Error('Could not add project');
+      }
+    },
   }
 });
 
