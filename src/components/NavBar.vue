@@ -5,12 +5,6 @@
   </nav>
 </template>
 
-<script>
-export default {
-  
-}
-</script>
-
 <style scoped>
   .main-nav {
     text-align: center;
