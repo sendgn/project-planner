@@ -12,6 +12,8 @@
 import { computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import SingleProject from '@/components/SingleProject.vue';
+import NavBar from '@/components/NavBar.vue';
+
 
 export default {
   name: 'HomeView',
