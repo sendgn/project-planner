@@ -10,7 +10,7 @@
       "id": 2,
       "title": "Make marketing email",
       "details": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam sint iure ad dicta velit fugiat veritatis molestiae voluptate dolore pariatur",
-      "complete": true
+      "complete": false
     },
     {
       "title": "Design a new website",
