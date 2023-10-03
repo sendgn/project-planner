@@ -23,6 +23,7 @@ export default {
     const handleSubmit = async () => {
       try {
         await store.dispatch('add', {
+          id: store.state.projects.length + 1,
           title: title.value,
           details: details.value,
           complete: false

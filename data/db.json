@@ -4,19 +4,19 @@
       "id": 1,
       "title": "Create new homepage banner",
       "details": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia harum veritatis veniam aliquam hic! Reiciendis illo reprehenderit fugiat facere officiis optio eaque non, minus a! Laborum dicta modi molestiae corporis",
-      "complete": false
+      "complete": true
     },
     {
       "id": 2,
       "title": "Make marketing email123",
       "details": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam sint iure ad dicta velit fugiat veritatis molestiae voluptate dolore pariatur",
-      "complete": true
+      "complete": false
     },
     {
-      "title": "Design a new website",
-      "details": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia harum veritatis veniam aliquam hic! Reiciendis illo reprehenderit fugiat. Dritatuli!",
-      "complete": false,
-      "id": 3
+      "id": 3,
+      "title": "123123",
+      "details": "123123123",
+      "complete": true
     }
   ]
 }

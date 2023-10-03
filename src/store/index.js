@@ -4,7 +4,8 @@ const uri = 'http://localhost:3000/projects/';
 
 const store = createStore({
   state: {
-    projects: []
+    projects: [],
+    filter: 'all'
   },
   mutations: {
     setProjects(state, payload) {
@@ -17,6 +18,10 @@ const store = createStore({
     },
     addProject(state, payload) {
       state.projects.push(payload);
+    },
+    setFilter(state, payload) {
+      state.filter = payload;
+      console.log('filter state changed:', state.filter);
     }
   },
   actions: {
@@ -55,18 +60,21 @@ const store = createStore({
         throw new Error('Could not complete project');
       }
     },
-    async add(context, { title, details, complete }) {
+    async add(context, { id, title, details, complete }) {
       const resp = await fetch(uri, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title, details, complete })
+        body: JSON.stringify({ id, title, details, complete })
       });
       if (resp.ok) {
-        context.commit('addProject', { title, details, complete });
+        context.commit('addProject', { id, title, details, complete });
       } else {
         throw new Error('Could not add project');
       }
     },
+    changeFilter(context, payload) {
+      context.commit('setFilter', payload);
+    }
   }
 });
 
