@@ -29,7 +29,7 @@ export default {
 
     const toggleDetails = () => {
       showDetails.value = !showDetails.value;
-    }
+    };
 
     const toggleComplete = async () => {
       try {
@@ -37,7 +37,7 @@ export default {
       } catch (err) {
         console.log(err.message);
       }
-    }
+    };
 
     const deleteProject = async () => {
       try {
@@ -45,7 +45,7 @@ export default {
       } catch (err) {
         console.log(err.message);
       }
-    }
+    };
 
     return {
       showDetails,

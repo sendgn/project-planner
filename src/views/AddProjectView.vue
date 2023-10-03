@@ -32,7 +32,7 @@ export default {
       } catch (err) {
         console.log(err.message);
       }
-    }
+    };
 
     return {
       title, details, handleSubmit
