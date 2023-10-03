@@ -52,7 +52,7 @@ const store = createStore({
         const mutate = (p) => p.complete = !p.complete;
         context.commit('updateProjects', { project, mutate });
       } else {
-        throw new Error('Could not update project');
+        throw new Error('Could not complete project');
       }
     },
     async add(context, { title, details, complete }) {
